@@ -1,0 +1,9 @@
+data/
+research/
+.ipynb_checkpoints/
+data
+research
+.ipynb_checkpoints
+.DS_Store
+data_clean.csv
+data_engineered.csv
