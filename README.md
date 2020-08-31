@@ -17,14 +17,13 @@ Predictive modeling applying the entire data science lifecycle and building a Pl
 - **Dynamically changing listing recommendation** as soon as input values are adapted
 
 # Files in repository:
-- 1_Clean.ipynb (Jupyter Notebook for Data Cleaning)
-- 2_EDA_Clean.ipynb (Jupyter Notebook for EDA after Data Cleaning)
-- 3_Feature_Engineering.ipynb (Jupyter Notebook for Feature Engineering)
-- 4_EDA_Engineered.ipynb (Jupyter Notebook for EDA after Feature Engineering)
-- 5_Predictive_Modeling.ipynb (Jupyter Notebook for Predictive Modeling)
+- 1_Predictive_Modeling.ipynb (Jupyter Notebook for Predictive Modeling, including data cleaning and feature engineering)
+- 2_EDA.ipynb (Jupyter Notebook for EDA, including one part after data cleaning and another after data engineering)
+- 3_App_Preparation.ipynb (Jupyter Notebook for fast access to saved models as means to review and/or overwrite them)
+- 4_predictor.py (Python code for web application)
 - 2020-09_02_Final Presentation.pdf (presentation of findings)
 
-# Structure of 5_Predictive_Modeling.ipynb file
+# Structure of 1_Predictive_Modeling.ipynb file
 - **1 Set-up**
   - 1.1 Libraries and Dashboard
 - **2 Preprocessing (Train/Test Split and Pipeline)**
