@@ -85,7 +85,6 @@ jupyterlab==2.2.4
 jupyterlab-server @ file:///home/conda/feedstock_root/build_artifacts/jupyterlab_server_1593951277307/work
 jwcrypto==0.6.0
 kaggle==1.5.6
-kaleido @ file:///C:/ProgramData/Anaconda3/conda-bld/python-kaleido_1596620511892/work/kaleido-0.0.3-py2.py3-none-win_amd64.whl
 Keras==2.3.1
 Keras-Applications @ file:///tmp/build/80754af9/keras-applications_1594366238411/work
 Keras-Preprocessing==1.1.0
