@@ -26,3 +26,4 @@ python-editor==1.0.4
 python-slugify==4.0.1
 scikit-learn
 seaborn==0.10.1
+xgboost==0.90
