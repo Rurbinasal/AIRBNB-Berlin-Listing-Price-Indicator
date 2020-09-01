@@ -1,6 +1,8 @@
+data/
 research/
 Saves/
 .ipynb_checkpoints/
+data
 research
 .ipynb_checkpoints
 saves
@@ -11,3 +13,7 @@ data_clean.pkl
 data_engineered.pkl
 types_clean.csv
 types_engineered.csv
+venv
+*.pyc
+.DS_Store
+.env
