@@ -73,26 +73,6 @@ X_test4 = joblib.load(f"data/{dataset_loc4}_{dataset_date4}/APP_X_test.pkl")
 MAPE_median4 = joblib.load(f"data/{dataset_loc4}_{dataset_date4}/APP_MAPE_median.pkl")
 zipcodes4 = joblib.load(f"data/{dataset_loc4}_{dataset_date4}/APP_zipcode.pkl")
 
-# Import data for Berlin 2020-06-13
-#dataset_loc5 = 'berlin'
-#dataset_date5 = '2020-06-13'
-#data5 = joblib.load(f"../data/{dataset_loc5}_{dataset_date5}/APP_data_engineered.pkl")
-#model5 = joblib.load(f"../data/{dataset_loc5}_{dataset_date5}/APP_best_model.pkl")
-#preprocessor5 = joblib.load(f"../data/{dataset_loc5}_{dataset_date5}/APP_preprocessor.pkl")
-#X_test5 = joblib.load(f"../data/{dataset_loc5}_{dataset_date5}/APP_X_test.pkl")
-#MAPE_median5 = joblib.load(f"../data/{dataset_loc5}_{dataset_date5}/APP_MAPE_median.pkl")
-#zipcodes5 = joblib.load(f"../data/{dataset_loc5}_{dataset_date5}/APP_zipcode.pkl")
-
-# Import data for Amsterdam 2020-07-09
-#dataset_loc6 = 'amsterdam'
-#dataset_date6 = '2020-07-09'
-#data6 = joblib.load(f"../data/{dataset_loc6}_{dataset_date6}/APP_data_engineered.pkl")
-#model6 = joblib.load(f"../data/{dataset_loc6}_{dataset_date6}/APP_best_model.pkl")
-#preprocessor6 = joblib.load(f"../data/{dataset_loc6}_{dataset_date6}/APP_preprocessor.pkl")
-#X_test6 = joblib.load(f"../data/{dataset_loc6}_{dataset_date6}/APP_X_test.pkl")
-#MAPE_median6 = joblib.load(f"../data/{dataset_loc6}_{dataset_date6}/APP_MAPE_median.pkl")
-#zipcodes6 = joblib.load(f"../data/{dataset_loc6}_{dataset_date6}/APP_zipcode.pkl")
-
 zipcode_options = {
     'berlin': zipcodes,
     'amsterdam': zipcodes2,
@@ -107,9 +87,13 @@ app.layout = html.Div([
     html.Div(
         className='container', children=[
             html.Header(
-                html.Div(className = 'os-header', style={'background-image': 'url(assets/app_icon.png)', 'background-repeat': 'no-repeat',
+                html.Div(className='os-header',
+                         style={'background-image': 'url(assets/app_icon.png)', 'background-repeat': 'no-repeat',
                                 'background-position': 'left', 'background-size': 'contain'},
                          children=[html.Div([dcc.Markdown('# Airbnb Pricing Indicator')], style={'padding-left': '130px'})])
+#                html.Div(className='os-header', children=[
+#                    html.Div([html.Img(src=app.get_asset_url('app_icon.png'), style={'maxHeight': '100px', 'maxWidth': '100px'})], style={'display': 'inline-block', 'height': '40px'}),
+#                    html.Div([dcc.Markdown('# Airbnb Pricing Indicator')], style={'display': 'inline-block', 'maxHeight': '100px', 'maxWidth': '840px', 'margin': 'auto'})
             ),
             html.Main(
             dcc.Tabs(className = 'os-tab-container', children=[
@@ -140,7 +124,9 @@ app.layout = html.Div([
                             ### About me
                             **I am a Data Scientist and passionate traveller, aiming for a long and exciting future in 
                             the field of data**. This specific project was created as the final capstone during my 
-                            three-month Data Scientist Bootcamp at neuefische GmbH in Hamburg. Please feel free 
+                            three-month Data Scientist Bootcamp at neuefische GmbH in Hamburg. The project is not in
+                             any way affiliated with Airbnb and has been carried out with data retrieved at 
+                              [Inside Airbnb](http://insideairbnb.com/get-the-data.html). Please feel free 
                             to get in touch or contact me with regard to this tool or other topics.  
                             
                             Github project repo: https://github.com/Rurbinasal/AIRBNB-Berlin-Listing-Price-Indicator  
@@ -157,14 +143,11 @@ app.layout = html.Div([
                         html.Div(className='content', children=[
                         # Selection of dataset
                         html.Div([
-                            dcc.Markdown('### Please first select city and date (from April 2020 on, results may be impacted by COVID):'),
+                            dcc.Markdown('### Please first select a city (analysis currently based on March 2020 to avoid COVID impact):'),
                             dcc.Dropdown(
                                 id='city',
                                 options=[{'label': city.capitalize(), 'value': city} for city in data_options.keys()],
                                 value='amsterdam'
-                            ),
-                            dcc.Dropdown(
-                                id='date'
                             ),
                         ]),
 
@@ -174,7 +157,8 @@ app.layout = html.Div([
                         html.Div([
                             dcc.Markdown('#### Zipcode:'),
                             dcc.Dropdown(
-                                id='zipcode'
+                                id='zipcode',
+                                value='zip_other'
                             ),
                         ]),
                     # Property type:
@@ -487,23 +471,14 @@ app.layout = html.Div([
 
 
 @app.callback(
-    [Output('date', 'options'),
-    Output('zipcode', 'options'),
-     Output('background_img', 'src')],
+    [Output('zipcode', 'options'),
+     Output('background_img', 'src'),
+     Output('zipcode', 'value')],
     [Input('city', 'value')])
 def set_date_options(selected_city):
-    return [{'label': date[:-3], 'value': date} for date in data_options[selected_city]], \
-           [{'label': zipcode[4:], 'value': zipcode} for zipcode in zipcode_options[selected_city]],\
-           app.get_asset_url(f'{selected_city.lower()}_background.png')
-
-
-@app.callback(
-    [Output('date', 'value'),
-    Output('zipcode', 'value')],
-    [Input('date', 'options'),
-     Input('zipcode', 'options')])
-def set_cities_value(available_dates, available_zipcodes):
-    return available_dates[0]['value'], available_zipcodes[-1]['value']
+    return [{'label': zipcode[4:], 'value': zipcode} for zipcode in zipcode_options[selected_city]],\
+           app.get_asset_url(f'{selected_city.lower()}_background.png'),\
+           'zip_other'
 
 
 @app.callback(
@@ -569,13 +544,6 @@ def predict(accommodates, am_balcony, am_breakfast, am_child_friendly, am_elevat
              y_pred])
         y_pred_exp = [round(curr.convert(math.exp(el), 'USD', 'EUR', date=date(2020, 3, 17))) for el in y_pred]
 
-#       if city_date == '2020-06-13':
-#            x_test_prep = preprocessor5.transform(df)
-#            y_pred = model5.predict(x_test_prep)
-#            y_pred_interval = tuple([(round(curr.convert(math.exp(el-el*MAPE_median5), 'USD', 'EUR', date=date(2020, 3, 17))),
-#                                      round(curr.convert(math.exp(el+el*MAPE_median5), 'USD', 'EUR', date=date(2020, 3, 17)))) for el in y_pred])
-#            y_pred_exp = [round(curr.convert(math.exp(el), 'USD', 'EUR', date=date(2020, 6, 13))) for el in y_pred]
-
     elif city == 'amsterdam':
         x_test_prep = preprocessor2.transform(df)
         y_pred = model2.predict(x_test_prep)
@@ -584,15 +552,6 @@ def predict(accommodates, am_balcony, am_breakfast, am_child_friendly, am_elevat
               round(curr.convert(math.exp(el + el * MAPE_median2), 'USD', 'EUR', date=date(2020, 3, 13)))) for el in
              y_pred])
         y_pred_exp = [round(curr.convert(math.exp(el), 'USD', 'EUR', date=date(2020, 3, 13))) for el in y_pred]
-
-#        if city_date == '2020-07-09':
-#            x_test_prep = preprocessor6.transform(df)
-#            y_pred = model6.predict(x_test_prep)
-#            y_pred_interval = tuple(
-#                [(round(curr.convert(math.exp(el - el * MAPE_median6), 'USD', 'EUR', date=date(2020, 3, 13))),
-#                  round(curr.convert(math.exp(el + el * MAPE_median6), 'USD', 'EUR', date=date(2020, 3, 13)))) for el in
-#                 y_pred])
-#            y_pred_exp = [round(curr.convert(math.exp(el), 'USD', 'EUR', date=date(2020, 7, 9))) for el in y_pred]
 
     elif city == 'paris':
         x_test_prep = preprocessor3.transform(df)
@@ -631,28 +590,25 @@ def generate_url(listing_no):
 @app.callback(
     [Output('map_fig', 'figure'),
      Output('total_listings', 'children')],
-    [Input('city', 'value'),
-     Input('date', 'value')])
+    [Input('city', 'value')])
 
-def generate_map(city, city_date):
+def generate_map(city):
 # Define map content and layout
     if city == "berlin":
         map_input=data
+        city_date=dataset_date
         zoom=9
-#        elif city_date == '2020-06-13':
-#            map_input=data5
-#            zoom=9
     elif city == "amsterdam":
         map_input=data2
+        city_date=dataset_date2
         zoom=10
-#        elif city_date == '2020-07-09':
-#            map_input=data6
-#            zoom=10
     elif city == "paris":
         map_input=data3
+        city_date=dataset_date3
         zoom=11
     elif city == "barcelona":
         map_input=data4
+        city_date=dataset_date4
         zoom=11
     data.price = [round(curr.convert(math.exp(el), 'USD', 'EUR', date=date(2020, 3, 17))) for el in data.price_log]
     map_fig = px.scatter_mapbox(
@@ -687,7 +643,6 @@ if __name__ == '__main__':
 
 
 # OPEN TOPICS:
-# - Zipcodes are currently based only on city, not on dates --> might cause issues
 # - Make for-loop for importing data/models to make it scalable
 # - Potentially keep only one date per city (a) makes more sense, b) causes less potential issues)
 # - Remove edge/margin in web app (left and top)
