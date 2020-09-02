@@ -1,5 +1,5 @@
-**Access the by clicking on the image:**  
-[![title](assets/title.png)](https://listing-price-indicator.herokuapp.com/){:target="_blank"}
+**Access the web application by clicking on the image (ctrl+click for new tab):**  
+[![title](assets/title.png)](https://listing-price-indicator.herokuapp.com/)
 
 # Description
 Predictive modeling applying the entire data science lifecycle and building a Plotly Dash web application for user interaction with the model (retrieve listing pricing indication).
