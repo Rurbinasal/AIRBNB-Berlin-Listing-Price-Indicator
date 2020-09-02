@@ -1,5 +1,5 @@
-**Access the web application here: [AIRBNB Pricing Indicator](https://listing-price-indicator.herokuapp.com/)**  
-[![title](assets/title.png)](https://listing-price-indicator.herokuapp.com/)
+**Access the by clicking on the image:**  
+[![title](assets/title.png)](https://listing-price-indicator.herokuapp.com/){:target="_blank"}
 
 # Description
 Predictive modeling applying the entire data science lifecycle and building a Plotly Dash web application for user interaction with the model (retrieve listing pricing indication).
