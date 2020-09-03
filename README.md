@@ -99,3 +99,11 @@ Predictive modeling applying the entire data science lifecycle and building a Pl
 
 **Replicability**
 - Apply analysis to other cities and compare results
+
+**Specific open tasks/topics**
+- Explore how to use calendar data for availability
+- Categorize listings by quality (low/mid/high)
+- Calculate average price based on weighted prices from past months/years
+- Determine own review score through text recognition
+- Automatize creation of log and sqrt columns (e.g. based on skew)
+- Convert price to EUR and consequently remove the conversion in app
