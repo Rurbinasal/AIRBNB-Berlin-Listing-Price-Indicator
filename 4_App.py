@@ -10,9 +10,12 @@ import math
 from currency_converter import CurrencyConverter
 from datetime import date
 
-external_stylesheets = ['https://codepen.io/rurbinasal/pen/QWNdogQ.css']
+#external_stylesheets = ['https://codepen.io/rurbinasal/pen/QWNdogQ']
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__)#, external_stylesheets=external_stylesheets)
+#app.css.append_css({
+#    "external_url": "https://codepen.io/rurbinasal/pen/QWNdogQ.css"
+#})
 app.config.suppress_callback_exceptions = True
 server = app.server
 
