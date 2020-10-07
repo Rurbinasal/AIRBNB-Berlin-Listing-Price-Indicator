@@ -107,3 +107,4 @@ Predictive modeling applying the entire data science lifecycle and building a Pl
 - Determine own review score through text recognition
 - Automatize creation of log and sqrt columns (e.g. based on skew)
 - Convert price to EUR and consequently remove the conversion in app
+- Create new feature out of binned longitude and latitude (more granular than zipcode)
