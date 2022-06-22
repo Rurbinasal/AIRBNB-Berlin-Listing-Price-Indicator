@@ -16,7 +16,7 @@ gunicorn==20.0.4
 joblib
 json5
 matplotlib
-numpy==1.16.6
+numpy==1.22.0
 pandas
 plotly
 plotly-geo==1.0.0
